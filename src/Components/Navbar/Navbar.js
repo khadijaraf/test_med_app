@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const navigate = useNavigate();
 
     // Handle scroll effect
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
         };
-
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -25,10 +26,9 @@ const Navbar = () => {
         setIsMobileMenuOpen(false);
     };
 
-    // Handle navigation clicks
-    const handleNavClick = (href) => {
-        // Add your navigation logic here
-        console.log('Navigating to:', href);
+    // Handle navigation
+    const handleNavClick = (path) => {
+        navigate(path);
         closeMobileMenu();
     };
 
@@ -36,7 +36,7 @@ const Navbar = () => {
         <nav className={`navbar ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
             <div className="navbar-container">
                 {/* Logo Section */}
-                <div className="navbar-logo" onClick={() => handleNavClick('#home')}>
+                <div className="navbar-logo" onClick={() => handleNavClick('/')}>
                     <span className="logo-icon">🏥</span>
                     <span className="logo-text">StayHealthy</span>
                 </div>
@@ -44,50 +44,22 @@ const Navbar = () => {
                 {/* Navigation Links */}
                 <ul className="navbar-menu">
                     <li className="navbar-item">
-                        <a 
-                            href="#home" 
-                            className="navbar-link"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleNavClick('#home');
-                            }}
-                        >
+                        <a href="/" className="navbar-link" onClick={(e) => { e.preventDefault(); handleNavClick('/'); }}>
                             Home
                         </a>
                     </li>
                     <li className="navbar-item">
-                        <a 
-                            href="#appointments" 
-                            className="navbar-link"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleNavClick('#appointments');
-                            }}
-                        >
+                        <a href="#appointments" className="navbar-link" onClick={(e) => { e.preventDefault(); handleNavClick('#appointments'); }}>
                             Appointments
                         </a>
                     </li>
                     <li className="navbar-item">
-                        <a 
-                            href="#health-blog" 
-                            className="navbar-link"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleNavClick('#health-blog');
-                            }}
-                        >
+                        <a href="#health-blog" className="navbar-link" onClick={(e) => { e.preventDefault(); handleNavClick('#health-blog'); }}>
                             Health Blog
                         </a>
                     </li>
                     <li className="navbar-item">
-                        <a 
-                            href="#reviews" 
-                            className="navbar-link"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleNavClick('#reviews');
-                            }}
-                        >
+                        <a href="#reviews" className="navbar-link" onClick={(e) => { e.preventDefault(); handleNavClick('#reviews'); }}>
                             Reviews
                         </a>
                     </li>
@@ -95,30 +67,16 @@ const Navbar = () => {
 
                 {/* Auth Buttons */}
                 <div className="navbar-auth">
-                    <a 
-                        href="#signup" 
-                        className="auth-btn signup-btn"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handleNavClick('#signup');
-                        }}
-                    >
+                    <a href="/signup" className="auth-btn signup-btn" onClick={(e) => { e.preventDefault(); handleNavClick('/signup'); }}>
                         Sign Up
                     </a>
-                    <a 
-                        href="#login" 
-                        className="auth-btn login-btn"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handleNavClick('#login');
-                        }}
-                    >
+                    <a href="/login" className="auth-btn login-btn" onClick={(e) => { e.preventDefault(); handleNavClick('/login'); }}>
                         Login
                     </a>
                 </div>
 
                 {/* Mobile Menu Toggle */}
-                <div 
+                <div
                     className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`}
                     onClick={toggleMobileMenu}
                     role="button"
@@ -140,74 +98,32 @@ const Navbar = () => {
             <div className={`mobile-menu ${isMobileMenuOpen ? 'active' : ''}`}>
                 <ul className="mobile-menu-items">
                     <li className="mobile-menu-item">
-                        <a 
-                            href="#home" 
-                            className="mobile-menu-link"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleNavClick('#home');
-                            }}
-                        >
+                        <a href="/" className="mobile-menu-link" onClick={(e) => { e.preventDefault(); handleNavClick('/'); }}>
                             Home
                         </a>
                     </li>
                     <li className="mobile-menu-item">
-                        <a 
-                            href="#appointments" 
-                            className="mobile-menu-link"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleNavClick('#appointments');
-                            }}
-                        >
+                        <a href="#appointments" className="mobile-menu-link" onClick={(e) => { e.preventDefault(); handleNavClick('#appointments'); }}>
                             Appointments
                         </a>
                     </li>
                     <li className="mobile-menu-item">
-                        <a 
-                            href="#health-blog" 
-                            className="mobile-menu-link"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleNavClick('#health-blog');
-                            }}
-                        >
+                        <a href="#health-blog" className="mobile-menu-link" onClick={(e) => { e.preventDefault(); handleNavClick('#health-blog'); }}>
                             Health Blog
                         </a>
                     </li>
                     <li className="mobile-menu-item">
-                        <a 
-                            href="#reviews" 
-                            className="mobile-menu-link"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleNavClick('#reviews');
-                            }}
-                        >
+                        <a href="#reviews" className="mobile-menu-link" onClick={(e) => { e.preventDefault(); handleNavClick('#reviews'); }}>
                             Reviews
                         </a>
                     </li>
                     <li className="mobile-menu-item">
-                        <a 
-                            href="#signup" 
-                            className="mobile-auth-btn mobile-signup-btn"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleNavClick('#signup');
-                            }}
-                        >
-                            Sign Up
+                        <a href="/signup" className="mobile-auth-btn mobile-signup-btn" onClick={(e) => { e.preventDefault(); handleNavClick('/signup'); }}>
+                            Sign Up Now
                         </a>
                     </li>
                     <li className="mobile-menu-item">
-                        <a 
-                            href="#login" 
-                            className="mobile-auth-btn mobile-login-btn"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleNavClick('#login');
-                            }}
-                        >
+                        <a href="/login" className="mobile-auth-btn mobile-login-btn" onClick={(e) => { e.preventDefault(); handleNavClick('/login'); }}>
                             Login
                         </a>
                     </li>
