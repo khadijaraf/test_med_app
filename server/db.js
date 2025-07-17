@@ -1,30 +1,33 @@
 const mongoose = require('mongoose');
-const mongoURI = "mongodb://root:<1uCGbBsyV6sAEVlWUuvSsHma>@172.21.148.105:27017";
+
+// Fix the deprecation warning
+mongoose.set('strictQuery', false);
+
+// MongoDB connection URI - matches your exact configuration
+const mongoURI = "mongodb://root:1uCGbBsyV6sAEVlWUuvSsHma@172.21.148.105:27017";
 
 const connectToMongo = async (retryCount) => {
     const MAX_RETRIES = 3;
     const count = retryCount ?? 0;
     try {
-        await mongoose.connect(mongoURI, {
+        await mongoose.connect(mongoURI, { 
+            dbName: 'stayhealthybeta1',
             useNewUrlParser: true,
-            useUnifiedTopology: true,
-            serverSelectionTimeoutMS: 5000,
-            socketTimeoutMS: 45000,
+            useUnifiedTopology: true
         });
-        console.log("Connected to MongoDB successfully");
-        return true;
+        console.info('Connected to Mongo Successfully');
+        return;
     } catch (error) {
-        console.log(`MongoDB connection failed. Attempt ${count + 1} of ${MAX_RETRIES}`);
-        console.error("Error connecting to MongoDB:", error.message);
-        
-        if (count < MAX_RETRIES - 1) {
-            console.log(`Retrying connection in 5 seconds...`);
-            await new Promise(resolve => setTimeout(resolve, 5000));
-            return connectToMongo(count + 1);
-        } else {
-            console.error("Max retries reached. Could not connect to MongoDB.");
-            process.exit(1);
+        console.error(error);
+
+        const nextRetryCount = count + 1;
+
+        if (nextRetryCount >= MAX_RETRIES) {
+            throw new Error('Unable to connect to Mongo!');
         }
+
+        console.info(`Retrying, retry count: ${nextRetryCount}`);
+        return await connectToMongo(nextRetryCount);
     }
 };
 
