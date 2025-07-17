@@ -6,6 +6,7 @@ import Navbar from './Components/Navbar/Navbar';
 import Landing_Page from './Components/Landing_Page/Landing_Page';
 import Sign_Up from './Components/Sign_up/Sign_Up';
 import Login from './Components/Login/Login';
+import AuthDebug from './Components/AuthDebug';
 
 function App() {
   return (
