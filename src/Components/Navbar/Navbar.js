@@ -7,6 +7,7 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userName, setUserName] = useState('');
+    const [userRole, setUserRole] = useState('');
     const navigate = useNavigate();
 
     // Handle scroll effect
@@ -21,12 +22,15 @@ const Navbar = () => {
     // Check authentication status
     useEffect(() => {
         const checkAuthStatus = () => {
-            const token = sessionStorage.getItem('auth-token');
-            const name = sessionStorage.getItem('name');
-            const email = sessionStorage.getItem('email');
+            const token = sessionStorage.getItem('auth-token') || localStorage.getItem('auth-token');
+            const name = sessionStorage.getItem('name') || localStorage.getItem('name');
+            const email = sessionStorage.getItem('email') || localStorage.getItem('email');
+            const role = sessionStorage.getItem('role') || localStorage.getItem('role');
             
             if (token) {
                 setIsLoggedIn(true);
+                setUserRole(role || 'patient');
+                
                 // Use name if available, otherwise extract from email
                 if (name) {
                     setUserName(name);
@@ -40,6 +44,7 @@ const Navbar = () => {
             } else {
                 setIsLoggedIn(false);
                 setUserName('');
+                setUserRole('');
             }
         };
 
@@ -76,10 +81,19 @@ const Navbar = () => {
         sessionStorage.removeItem('name');
         sessionStorage.removeItem('email');
         sessionStorage.removeItem('phone');
+        sessionStorage.removeItem('role');
+        
+        // Clear local storage
+        localStorage.removeItem('auth-token');
+        localStorage.removeItem('name');
+        localStorage.removeItem('email');
+        localStorage.removeItem('phone');
+        localStorage.removeItem('role');
         
         // Update state
         setIsLoggedIn(false);
         setUserName('');
+        setUserRole('');
         
         // Navigate to home and close mobile menu
         navigate('/');
@@ -106,6 +120,11 @@ const Navbar = () => {
                         </a>
                     </li>
                     <li className="navbar-item">
+                        <a href="/instant-consultation" className="navbar-link" onClick={(e) => { e.preventDefault(); handleNavClick('/instant-consultation'); }}>
+                            Find Doctors
+                        </a>
+                    </li>
+                    <li className="navbar-item">
                         <a href="#appointments" className="navbar-link" onClick={(e) => { e.preventDefault(); handleNavClick('#appointments'); }}>
                             Appointments
                         </a>
@@ -126,7 +145,10 @@ const Navbar = () => {
                 <div className="navbar-auth">
                     {isLoggedIn ? (
                         <>
-                            <span className="welcome-user">Welcome, {userName}!</span>
+                            <span className="welcome-user">
+                                Welcome, {userName}! 
+                                {userRole && <span className="user-role">({userRole})</span>}
+                            </span>
                             <button 
                                 className="auth-btn logout-btn" 
                                 onClick={handleLogout}
@@ -174,6 +196,11 @@ const Navbar = () => {
                         </a>
                     </li>
                     <li className="mobile-menu-item">
+                        <a href="/instant-consultation" className="mobile-menu-link" onClick={(e) => { e.preventDefault(); handleNavClick('/instant-consultation'); }}>
+                            Find Doctors
+                        </a>
+                    </li>
+                    <li className="mobile-menu-item">
                         <a href="#appointments" className="mobile-menu-link" onClick={(e) => { e.preventDefault(); handleNavClick('#appointments'); }}>
                             Appointments
                         </a>
@@ -193,7 +220,10 @@ const Navbar = () => {
                     {isLoggedIn ? (
                         <>
                             <li className="mobile-menu-item">
-                                <span className="mobile-welcome-user">Welcome, {userName}!</span>
+                                <span className="mobile-welcome-user">
+                                    Welcome, {userName}!
+                                    {userRole && <span className="user-role">({userRole})</span>}
+                                </span>
                             </li>
                             <li className="mobile-menu-item">
                                 <button 
