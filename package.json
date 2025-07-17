@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && rm -rdf server/build && mv build server/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -37,5 +37,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-transform-runtime": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-react": "^7.27.1",
+    "babel-loader": "^9.2.1",
+    "css-loader": "^6.11.0",
+    "mini-css-extract-plugin": "^2.9.2",
+    "terser-webpack-plugin": "^5.3.14",
+    "webpack": "^5.100.2",
+    "webpack-cli": "^5.1.4"
   }
 }
