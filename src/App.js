@@ -8,6 +8,7 @@ import Sign_Up from './Components/Sign_up/Sign_Up';
 import Login from './Components/Login/Login';
 import AuthDebug from './Components/AuthDebug';
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
+import Reviews from './Components/Reviews/Reviews';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signup" element={<Sign_Up />} />
           <Route path="/login" element={<Login />} />
           <Route path="/instant-consultation" element={<InstantConsultation />} />
+          <Route path="/reviews" element={<Reviews />} />
           <Route path="/debug" element={<AuthDebug />} />
         </Routes>
       </Router>
