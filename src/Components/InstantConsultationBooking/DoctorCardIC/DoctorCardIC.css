@@ -1,15 +1,15 @@
-/* DoctorCardIC.css */
-
+/* Doctor Card Styles */
 .doctor-card {
-    background: white;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
     border-radius: 12px;
-    padding: 25px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    text-align: center;
-    border: 1px solid #e1e8ed;
-    max-width: 350px;
-    margin: 0 auto;
+    padding: 20px;
+    margin: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 400px;
+    min-height: 300px;
 }
 
 .doctor-card:hover {
@@ -18,7 +18,8 @@
 }
 
 .doctor-image {
-    margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 .doctor-image img {
@@ -26,45 +27,44 @@
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #f0f8ff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 4px solid #e0e6ed;
 }
 
 .doctor-info {
-    margin-bottom: 25px;
+    flex-grow: 1;
+    text-align: center;
 }
 
 .doctor-name {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #2c3e50;
-    margin: 0 0 8px 0;
+    color: #2c5aa0;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
 }
 
 .doctor-speciality {
-    font-size: 1.1rem;
-    color: #667eea;
-    font-weight: 600;
-    margin: 0 0 8px 0;
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 8px;
 }
 
 .doctor-experience {
-    font-size: 0.95rem;
-    color: #7f8c8d;
-    margin: 0 0 15px 0;
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 12px;
 }
 
 .doctor-rating {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-bottom: 10px;
+    gap: 5px;
+    margin-bottom: 12px;
 }
 
 .rating-label {
-    font-weight: 600;
-    color: #2c3e50;
+    font-size: 14px;
+    color: #333;
 }
 
 .stars {
@@ -73,100 +73,93 @@
 }
 
 .star {
-    font-size: 1.2rem;
-    transition: color 0.2s ease;
+    color: #ddd;
+    font-size: 16px;
 }
 
 .star.filled {
-    color: #f39c12;
+    color: #ffd700;
 }
 
 .star.half {
-    background: linear-gradient(90deg, #f39c12 50%, #ddd 50%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.star.empty {
-    color: #ddd;
+    color: #ffd700;
 }
 
 .rating-number {
-    font-size: 0.9rem;
-    color: #7f8c8d;
-    font-weight: 500;
+    color: #666;
+    font-size: 14px;
 }
 
 .doctor-location,
 .consultation-fee,
 .availability {
-    font-size: 0.9rem;
-    margin: 5px 0;
+    font-size: 14px;
+    margin-bottom: 5px;
     color: #555;
 }
 
 .availability {
-    color: #27ae60;
-    font-weight: 600;
-}
-
-.consultation-fee {
-    color: #e67e22;
-    font-weight: 600;
+    color: #28a745;
+    font-weight: 500;
 }
 
 .doctor-actions {
     margin-top: 20px;
+    text-align: center;
 }
 
 .book-now-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #28a745;
     color: white;
     border: none;
     padding: 12px 30px;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
 }
 
 .book-now-btn:hover {
+    background: #218838;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 }
 
-.book-now-btn:active {
-    transform: translateY(0);
-}
-
-/* Appointment Booked State */
+/* Appointment Booked Styles */
 .appointment-booked {
-    background: #d4edda;
-    border: 1px solid #c3e6cb;
+    background: #f8f9fa;
+    border: 2px solid #28a745;
     border-radius: 8px;
     padding: 15px;
     text-align: left;
 }
 
 .booking-status {
-    color: #155724;
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin: 0 0 10px 0;
+    color: #28a745;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 10px;
     text-align: center;
 }
 
-.patient-name,
-.patient-phone {
-    color: #155724;
-    font-size: 0.9rem;
+.appointment-details {
+    background: #fff;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+.appointment-details p {
     margin: 5px 0;
-    font-weight: 500;
+    font-size: 14px;
+    color: #333;
+}
+
+.appointment-details strong {
+    color: #2c5aa0;
 }
 
 .cancel-appointment-btn {
@@ -174,12 +167,11 @@
     color: white;
     border: none;
     padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 0.9rem;
+    border-radius: 5px;
+    font-size: 14px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
     width: 100%;
-    margin-top: 10px;
 }
 
 .cancel-appointment-btn:hover {
@@ -202,153 +194,53 @@
 }
 
 .booking-modal {
-    background: white;
+    background: #fff;
     border-radius: 12px;
-    padding: 30px;
-    max-width: 500px;
+    max-width: 600px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
 }
 
 .modal-header {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 20px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #e1e8ed;
-}
-
-.modal-header h3 {
-    margin: 0;
-    color: #2c3e50;
-    font-size: 1.5rem;
+    justify-content: flex-end;
+    border-radius: 12px 12px 0 0;
 }
 
 .close-modal {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 24px;
     cursor: pointer;
-    color: #7f8c8d;
-    padding: 5px;
-    border-radius: 50%;
-    transition: all 0.2s ease;
-}
-
-.close-modal:hover {
-    background: #f8f9fa;
-    color: #495057;
-}
-
-.modal-doctor-info {
+    color: #999;
+    padding: 0;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.modal-doctor-image {
-    width: 80px;
-    height: 80px;
+    justify-content: center;
     border-radius: 50%;
-    object-fit: cover;
-}
-
-.modal-doctor-info h4 {
-    margin: 0 0 5px 0;
-    color: #2c3e50;
-}
-
-.modal-doctor-info p {
-    margin: 2px 0;
-    color: #7f8c8d;
-    font-size: 0.9rem;
-}
-
-.modal-rating {
-    margin-top: 5px;
-}
-
-.booking-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 8px;
-}
-
-.form-group input {
-    padding: 12px;
-    border: 1px solid #e1e8ed;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.modal-actions {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.cancel-btn {
-    flex: 1;
-    background: #6c757d;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.cancel-btn:hover {
-    background: #5a6268;
-}
-
-.confirm-booking-btn {
-    flex: 1;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
     transition: all 0.3s ease;
 }
 
-.confirm-booking-btn:hover {
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-    transform: translateY(-1px);
+.close-modal:hover {
+    background: #f0f0f0;
+    color: #333;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .doctor-card {
-        margin: 0 10px;
-        padding: 20px;
+        margin: 10px;
+        padding: 15px;
+        max-width: none;
     }
     
     .doctor-image img {
@@ -357,35 +249,36 @@
     }
     
     .doctor-name {
-        font-size: 1.2rem;
+        font-size: 18px;
     }
     
     .booking-modal {
         margin: 10px;
-        padding: 20px;
+        width: calc(100% - 20px);
+        max-height: calc(100vh - 40px);
     }
     
-    .modal-doctor-info {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .modal-actions {
-        flex-direction: column;
+    .modal-overlay {
+        padding: 10px;
     }
 }
 
 @media (max-width: 480px) {
     .doctor-card {
-        padding: 15px;
+        margin: 5px;
+        padding: 12px;
     }
     
-    .doctor-rating {
-        flex-direction: column;
-        gap: 5px;
+    .doctor-image img {
+        width: 80px;
+        height: 80px;
     }
     
-    .stars {
-        justify-content: center;
+    .doctor-name {
+        font-size: 16px;
+    }
+    
+    .appointment-details p {
+        font-size: 13px;
     }
 }
