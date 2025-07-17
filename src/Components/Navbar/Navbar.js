@@ -8,6 +8,7 @@ const Navbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userName, setUserName] = useState('');
     const [userRole, setUserRole] = useState('');
+    const [showProfileDropdown, setShowProfileDropdown] = useState(false);
     const navigate = useNavigate();
 
     // Handle scroll effect
@@ -53,8 +54,17 @@ const Navbar = () => {
         // Listen for storage changes (when user logs in/out in another tab)
         window.addEventListener('storage', checkAuthStatus);
         
+        // Close dropdown when clicking outside
+        const handleClickOutside = (event) => {
+            if (!event.target.closest('.profile-dropdown')) {
+                setShowProfileDropdown(false);
+            }
+        };
+        document.addEventListener('click', handleClickOutside);
+        
         return () => {
             window.removeEventListener('storage', checkAuthStatus);
+            document.removeEventListener('click', handleClickOutside);
         };
     }, []);
 
@@ -68,10 +78,16 @@ const Navbar = () => {
         setIsMobileMenuOpen(false);
     };
 
+    // Toggle profile dropdown
+    const toggleProfileDropdown = () => {
+        setShowProfileDropdown(!showProfileDropdown);
+    };
+
     // Handle navigation
     const handleNavClick = (path) => {
         navigate(path);
         closeMobileMenu();
+        setShowProfileDropdown(false);
     };
 
     // Handle logout
@@ -94,6 +110,7 @@ const Navbar = () => {
         setIsLoggedIn(false);
         setUserName('');
         setUserRole('');
+        setShowProfileDropdown(false);
         
         // Navigate to home and close mobile menu
         navigate('/');
@@ -145,16 +162,45 @@ const Navbar = () => {
                 <div className="navbar-auth">
                     {isLoggedIn ? (
                         <>
-                            <span className="welcome-user">
-                                Welcome, {userName}! 
-                                {userRole && <span className="user-role">({userRole})</span>}
-                            </span>
-                            <button 
-                                className="auth-btn logout-btn" 
-                                onClick={handleLogout}
-                            >
-                                Logout
-                            </button>
+                            <div className="profile-dropdown">
+                                <button 
+                                    className="profile-dropdown-btn"
+                                    onClick={toggleProfileDropdown}
+                                >
+                                    <span className="welcome-user">
+                                        Welcome, {userName}! 
+                                        {userRole && <span className="user-role">({userRole})</span>}
+                                    </span>
+                                    <span className="dropdown-arrow">▼</span>
+                                </button>
+                                
+                                {showProfileDropdown && (
+                                    <div className="dropdown-menu">
+                                        <button 
+                                            className="dropdown-item"
+                                            onClick={() => handleNavClick('/profile')}
+                                        >
+                                            <span className="dropdown-icon">👤</span>
+                                            Your Profile
+                                        </button>
+                                        <button 
+                                            className="dropdown-item"
+                                            onClick={() => handleNavClick('/appointments')}
+                                        >
+                                            <span className="dropdown-icon">📅</span>
+                                            My Appointments
+                                        </button>
+                                        <div className="dropdown-divider"></div>
+                                        <button 
+                                            className="dropdown-item logout-item"
+                                            onClick={handleLogout}
+                                        >
+                                            <span className="dropdown-icon">🚪</span>
+                                            Logout
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                         </>
                     ) : (
                         <>
@@ -226,11 +272,21 @@ const Navbar = () => {
                                 </span>
                             </li>
                             <li className="mobile-menu-item">
+                                <a href="/profile" className="mobile-menu-link" onClick={(e) => { e.preventDefault(); handleNavClick('/profile'); }}>
+                                    👤 Your Profile
+                                </a>
+                            </li>
+                            <li className="mobile-menu-item">
+                                <a href="/appointments" className="mobile-menu-link" onClick={(e) => { e.preventDefault(); handleNavClick('/appointments'); }}>
+                                    📅 My Appointments
+                                </a>
+                            </li>
+                            <li className="mobile-menu-item">
                                 <button 
                                     className="mobile-auth-btn mobile-logout-btn" 
                                     onClick={handleLogout}
                                 >
-                                    Logout
+                                    🚪 Logout
                                 </button>
                             </li>
                         </>
